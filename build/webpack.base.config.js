@@ -3,7 +3,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CopyWebpackPlugin    from 'copy-webpack-plugin'
 import HtmlWebpackPlugin    from 'html-webpack-plugin'
 
-let VueLoader
+const VueLoader
 try {
     VueLoader = await import('vue-loader')
 }
