@@ -2,7 +2,14 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin    = require('copy-webpack-plugin')
 const HtmlWebpackPlugin    = require('html-webpack-plugin')
-const VueLoader            = require('vue-loader')
+
+const VueLoader
+try {
+    VueLoader = require('vue-loader')
+}
+catch {
+    VueLoader = undefined
+}
 
 const PATHS = {
     src   : path.join(__dirname, '../../src'),
