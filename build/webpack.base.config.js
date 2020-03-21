@@ -2,7 +2,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin    = require('copy-webpack-plugin')
 const HtmlWebpackPlugin    = require('html-webpack-plugin')
-const { VueLoaderPlugin }  = require('vue-loader')
+const VueLoader            = require('vue-loader')
 
 const PATHS = {
     src   : path.join(__dirname, '../../src'),
@@ -33,7 +33,7 @@ module.exports = {
         extensions: [ '.js', '.jsx', '.ts', '.tsx', 'json' ],
         alias: {
             '~': PATHS.src,
-            vue$: 'vue/dist/vue.js'
+            ...(VueLoader ? { vue$: 'vue/dist/vue.js' } : {})
         }
     },
     optimization: {
@@ -61,11 +61,11 @@ module.exports = {
                     'babel-loader',
                     {
                         loader: 'ts-loader',
-                        options: { appendTsSuffixTo: [/\.vue$/] }
+                        ...(VueLoader ? { options: { appendTsSuffixTo: [/\.vue$/] } } : {})
                     }
                 ]
             },
-            {
+            ...(VueLoader ? [{
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: {
@@ -73,7 +73,7 @@ module.exports = {
                         scss: 'vue-style-loader!css-loader!sass-loader'
                     }
                 }
-            },
+            }] : []),
             {
                 test: /\.css$/,
                 use: [
@@ -113,7 +113,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: 'img/[name].[hash:7].[ext]'
+                    name: 'assets/images/[name].[hash:7].[ext]'
                 }
             },
             {
@@ -121,16 +121,16 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: 'fonts/[name].[hash:7].[ext]'
+                    name: 'assets/fonts/[name].[hash:7].[ext]'
                 }
             }
         ]
     },
     plugins: [
-        new VueLoaderPlugin(),
+        ...(VueLoader ? [new VueLoaderPlugin()] : []),
 
         new MiniCssExtractPlugin({
-            filename: `assets/css/[name].[contenthash].css`
+            filename: 'assets/css/[name].[contenthash].css'
         }),
         
         new CopyWebpackPlugin([
