@@ -2,6 +2,8 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin    = require('copy-webpack-plugin')
 const HtmlWebpackPlugin    = require('html-webpack-plugin')
+const Sass   = require('sass')
+const Fibers = require('fibers')
 
 let VueLoader
 try {
@@ -99,20 +101,24 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/,
                 use: [
-                'style-loader',
-                MiniCssExtractPlugin.loader,
-                {
-                    loader: 'css-loader',
-                    options: { sourceMap: true }
-                },
-                {
-                    loader: 'postcss-loader',
-                    options: { sourceMap: true }
-                },
-                {
-                    loader: 'sass-loader',
-                    options: { sourceMap: true }
-                }
+                    'style-loader',
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: { sourceMap: true }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: { sourceMap: true }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                            implementation: Sass,
+                            sassOptions: { fiber: Fiber }
+                        }
+                    }
                 ]
             },
             {
