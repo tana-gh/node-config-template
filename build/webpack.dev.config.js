@@ -1,6 +1,6 @@
-import webpack from 'webpack'
-import merge   from 'webpack-merge'
-import baseWebpackConfig from './webpack.base.config.js'
+const webpack = require('webpack')
+const merge   = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.base.config.js')
 
 const devWebpackConfig = merge(baseWebpackConfig, {
     mode: 'development',
@@ -20,6 +20,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     ]
 })
 
-export default new Promise((res, rej) => {
+module.exports = new Promise((res, rej) => {
     res(devWebpackConfig)
 })
