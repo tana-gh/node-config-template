@@ -134,8 +134,8 @@ module.exports = {
         }),
         
         new CopyWebpackPlugin([
-            { from: `${PATHS.src}/${PATHS.assets}/images`, to: `${PATHS.assets}/images` },
-            { from: `${PATHS.src}/static`, to: '' }
+            { from: `${PATHS.src}/${PATHS.assets}/images` , to: `${PATHS.assets}/images` },
+            { from: `${PATHS.src}/${PATHS.assets}/favicon`, to: `${PATHS.assets}/favicon` }
         ]),
 
         ...Object.keys(PAGES).map(key =>
