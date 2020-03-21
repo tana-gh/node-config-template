@@ -7,14 +7,14 @@ const { VueLoaderPlugin }  = require('vue-loader')
 const PATHS = {
     src   : path.join(__dirname, '../../src'),
     dist  : path.join(__dirname, '../../dist'),
-    assets: 'assets'
+    assets: path.join(__dirname, '../../assets')
 }
 
 const ENTRIES = {
     main: PATHS.src
 }
 
-const PAGES_DIR = `${PATHS.src}/${PATHS.assets}/html`
+const PAGES_DIR = `${PATHS.assets}/html`
 const PAGES = {
     main: 'index.html'
 }
@@ -25,7 +25,7 @@ module.exports = {
     },
     entry: ENTRIES,
     output: {
-        filename: `${PATHS.assets}/js/[name].[contenthash].js`,
+        filename: `assets/js/[name].[contenthash].js`,
         path: PATHS.dist,
         publicPath: '/'
     },
@@ -130,12 +130,12 @@ module.exports = {
         new VueLoaderPlugin(),
 
         new MiniCssExtractPlugin({
-            filename: `${PATHS.assets}/css/[name].[contenthash].css`
+            filename: `assets/css/[name].[contenthash].css`
         }),
         
         new CopyWebpackPlugin([
-            { from: `${PATHS.src}/${PATHS.assets}/images` , to: `${PATHS.assets}/images` },
-            { from: `${PATHS.src}/${PATHS.assets}/favicon`, to: `${PATHS.assets}/favicon` }
+            { from: `${PATHS.assets}/images` , to: 'assets/images' },
+            { from: `${PATHS.assets}/favicon`, to: 'assets/favicon' }
         ]),
 
         ...Object.keys(PAGES).map(key =>
