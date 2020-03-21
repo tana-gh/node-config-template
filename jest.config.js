@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
     'moduleFileExtensions': [ 'js', 'jsx', 'ts', 'tsx' ],
     'moduleDirectories': [ 'node_modules' ],
     'moduleNameMapper': {

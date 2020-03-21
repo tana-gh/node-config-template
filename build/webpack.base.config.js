@@ -1,11 +1,11 @@
-const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CopyWebpackPlugin    = require('copy-webpack-plugin')
-const HtmlWebpackPlugin    = require('html-webpack-plugin')
+import path from 'path'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import CopyWebpackPlugin    from 'copy-webpack-plugin'
+import HtmlWebpackPlugin    from 'html-webpack-plugin'
 
 let VueLoader
 try {
-    VueLoader = require('vue-loader')
+    VueLoader = await import('vue-loader')
 }
 catch {
     VueLoader = undefined
@@ -26,7 +26,7 @@ const PAGES = {
     main: 'index.html'
 }
 
-module.exports = {
+export default {
     externals: {
         paths: PATHS
     },

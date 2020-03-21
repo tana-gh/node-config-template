@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
     plugins: [
         require('autoprefixer')(),
         require('postcss-normalize')(),
