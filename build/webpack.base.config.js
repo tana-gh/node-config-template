@@ -134,7 +134,7 @@ module.exports = {
         ]
     },
     plugins: [
-        ...(VueLoader ? [new VueLoaderPlugin()] : []),
+        ...(VueLoader ? [new VueLoader.VueLoaderPlugin()] : []),
 
         new MiniCssExtractPlugin({
             filename: 'assets/css/[name].[contenthash].css'
