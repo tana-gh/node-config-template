@@ -116,7 +116,7 @@ module.exports = {
                         options: {
                             sourceMap: true,
                             implementation: Sass,
-                            sassOptions: { fiber: Fiber }
+                            sassOptions: { fiber: Fibers }
                         }
                     }
                 ]
