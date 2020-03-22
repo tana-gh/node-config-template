@@ -83,7 +83,7 @@ module.exports = {
                 use: {
                     loader: 'svelte-loader',
                     options: {
-                        preprocess: SveltePreprocess({
+                        preprocess: require('svelte-preprocess')({
                             typescript: true,
                             postcss: true,
                             sass: true
@@ -124,10 +124,10 @@ module.exports = {
                         loader: 'sass-loader',
                         options: {
                             sourceMap: true,
-                            implementation: Sass,
+                            implementation: require('sass'),
                             sassOptions: {
                                 indentedSyntax: true,
-                                fiber: Fibers
+                                fiber: require('fibers')
                             }
                         }
                     }
