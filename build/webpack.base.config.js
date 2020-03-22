@@ -79,7 +79,7 @@ module.exports = {
                 loader: 'vue-loader',
                 options: {
                     loader: {
-                        sass: 'vue-style-loader!css-loader!sass-loader',
+                        sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
                         scss: 'vue-style-loader!css-loader!sass-loader'
                     }
                 }
