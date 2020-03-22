@@ -5,13 +5,11 @@ const HtmlWebpackPlugin    = require('html-webpack-plugin')
 const Sass   = require('sass')
 const Fibers = require('fibers')
 
-let VueLoader
-try {
-    VueLoader = require('vue-loader')
-}
-catch {
-    VueLoader = undefined
-}
+let VueLoader = undefined
+try { VueLoader = require('vue-loader') } catch {}
+
+let SvelteLoader = undefined
+try { SvelteLoader = require('svelte-loader') } catch {}
 
 const PATHS = {
     src   : path.join(__dirname, '../../src'),
@@ -40,9 +38,11 @@ module.exports = {
     },
     resolve: {
         extensions: [ '.js', '.jsx', '.ts', '.tsx', 'json' ],
+        ...(SvelteLoader ? { mainFields: ['svelte', 'browser', 'module', 'main'] } : {}),
         alias: {
             '~': PATHS.src,
-            ...(VueLoader ? { vue$: 'vue/dist/vue.js' } : {})
+            ...(VueLoader ? { vue$: 'vue/dist/vue.js' } : {}),
+            ...(SvelteLoader ? { svelte: path.resolve('node_modules', 'svelte') } : {})
         }
     },
     optimization: {
@@ -77,6 +77,20 @@ module.exports = {
             ...(VueLoader ? [{
                 test: /\.vue$/,
                 loader: 'vue-loader'
+            }] : []),
+            ...(SvelteLoader ? [{
+                test: /\.svelte$/,
+                use: {
+                    loader: 'svelte-loader',
+                    options: {
+                        preprocess: SveltePreprocess({
+                            typescript: true,
+                            postcss: true,
+                            sass: true
+                        })
+                    },
+                },
+                exclude: /node_modules/
             }] : []),
             {
                 test: /\.css$/,
