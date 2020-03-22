@@ -79,8 +79,8 @@ module.exports = {
                 loader: 'vue-loader',
                 options: {
                     loaders: {
-                        sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
-                        scss: 'vue-style-loader!css-loader!sass-loader'
+                        scss: 'vue-style-loader!css-loader!postcss-loader!sass-loader',
+                        sass: 'vue-style-loader!css-loader!postcss-loader!sass-loader?indentedSyntax'
                     }
                 }
             }] : []),
