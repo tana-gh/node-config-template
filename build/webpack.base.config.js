@@ -94,7 +94,31 @@ module.exports = {
                 ]
             },
             {
-                test: /\.s[ac]ss$/,
+                test: /\.sass$/,
+                use: [
+                    VueLoader ? 'vue-style-loader' : 'style-loader',
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: { sourceMap: true }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: { sourceMap: true }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                            indentedSyntax: true,
+                            implementation: Sass,
+                            sassOptions: { fiber: Fibers }
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.scss$/,
                 use: [
                     VueLoader ? 'vue-style-loader' : 'style-loader',
                     MiniCssExtractPlugin.loader,
