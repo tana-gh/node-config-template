@@ -110,9 +110,11 @@ module.exports = {
                         loader: 'sass-loader',
                         options: {
                             sourceMap: true,
-                            indentedSyntax: true,
                             implementation: Sass,
-                            sassOptions: { fiber: Fibers }
+                            sassOptions: {
+                                indentedSyntax: true,
+                                fiber: Fibers
+                            }
                         }
                     }
                 ]
