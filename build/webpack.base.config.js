@@ -76,18 +76,12 @@ module.exports = {
             },
             ...(VueLoader ? [{
                 test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    loaders: {
-                        scss: 'vue-style-loader!css-loader!postcss-loader!sass-loader',
-                        sass: 'vue-style-loader!css-loader!postcss-loader!sass-loader?indentedSyntax'
-                    }
-                }
+                loader: 'vue-loader'
             }] : []),
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader',
+                    VueLoader ? 'vue-style-loader' : 'style-loader',
                     MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
@@ -102,7 +96,7 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/,
                 use: [
-                    'style-loader',
+                    VueLoader ? 'vue-style-loader' : 'style-loader',
                     MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
