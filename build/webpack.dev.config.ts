@@ -20,6 +20,6 @@ const devWebpackConfig = merge(baseWebpackConfig, <Webpack.Configuration>{
     ]
 })
 
-module.exports = new Promise((res, rej) => {
+export default new Promise((res, rej) => {
     res(devWebpackConfig)
 })

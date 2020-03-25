@@ -7,6 +7,6 @@ const buildWebpackConfig = merge(baseWebpackConfig, <Webpack.Configuration>{
     plugins: []
 })
 
-module.exports = new Promise((res, rej) => {
+export default new Promise((res, rej) => {
     res(buildWebpackConfig)
 })

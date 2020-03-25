@@ -27,7 +27,7 @@ const PAGES = {
     main: 'index.html'
 }
 
-module.exports = <Webpack.Configuration>{
+export default <Webpack.Configuration>{
     externals: {
         paths: PATHS
     },
