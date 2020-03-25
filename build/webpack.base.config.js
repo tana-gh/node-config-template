@@ -91,22 +91,20 @@ module.exports = {
             }] : []),
             ...(SvelteLoader ? [{
                 test: /\.svelte$/,
-                use: {
-                    use: [
-                        'cache-loader',
-                        {
-                            loader: 'svelte-loader',
-                            options: {
-                                preprocess: require('svelte-preprocess')({
-                                    typescript: true,
-                                    postcss: true,
-                                    sass: true,
-                                    scss: true
-                                })
-                            }
+                use: [
+                    'cache-loader',
+                    {
+                        loader: 'svelte-loader',
+                        options: {
+                            preprocess: require('svelte-preprocess')({
+                                typescript: true,
+                                postcss: true,
+                                sass: true,
+                                scss: true
+                            })
                         }
-                    ]
-                },
+                    }
+                ],
                 exclude: /node_modules/
             }] : []),
             {
