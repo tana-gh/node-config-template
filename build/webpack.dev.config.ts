@@ -1,8 +1,8 @@
-const webpack = require('webpack')
-const merge   = require('webpack-merge')
+import * as Webpack from 'webpack'
+const merge             = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config.js')
 
-const devWebpackConfig = merge(baseWebpackConfig, {
+const devWebpackConfig = merge(baseWebpackConfig, <Webpack.Configuration>{
     mode: 'development',
     devtool: 'cheap-module-eval-source-map',
     devServer: {
@@ -14,7 +14,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         }
     },
     plugins: [
-        new webpack.SourceMapDevToolPlugin({
+        new Webpack.SourceMapDevToolPlugin({
             filename: '[file].map'
         })
     ]
