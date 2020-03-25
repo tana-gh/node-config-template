@@ -1,5 +1,4 @@
-import * as Webpack from 'webpack'
-import path         from 'path'
+const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin    = require('copy-webpack-plugin')
 const HtmlWebpackPlugin    = require('html-webpack-plugin')
@@ -12,26 +11,22 @@ try { VueLoader = require('vue-loader') } catch {}
 let SvelteLoader = undefined
 try { SvelteLoader = require('svelte-loader') } catch {}
 
-interface KeyValue {
-    [key: string]: string
-}
-
-const PATHS: KeyValue = {
+const PATHS = {
     src   : path.join(__dirname, '../../src'),
     dist  : path.join(__dirname, '../../dist'),
     assets: path.join(__dirname, '../../assets')
 }
 
-const ENTRIES: KeyValue = {
+const ENTRIES = {
     main: PATHS.src
 }
 
 const PAGES_DIR = `${PATHS.assets}/html`
-const PAGES: KeyValue = {
+const PAGES = {
     main: 'index.html'
 }
 
-export default <Webpack.Configuration>{
+module.exports = {
     externals: {
         paths: PATHS
     },
