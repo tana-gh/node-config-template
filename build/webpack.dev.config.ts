@@ -1,12 +1,12 @@
 import * as Webpack from 'webpack'
-const merge             = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.config.js')
+const merge      = require('webpack-merge')
+const baseConfig = require('./webpack.base.config.js')
 
-const devWebpackConfig = merge(baseWebpackConfig, <Webpack.Configuration>{
+const devWebpackConfig = merge(baseConfig, <Webpack.Configuration>{
     mode: 'development',
     devtool: 'cheap-module-eval-source-map',
     devServer: {
-        contentBase: baseWebpackConfig.externals.paths.dist,
+        contentBase: baseConfig.externals.paths.dist,
         port: 8080,
         overlay: {
             warnings: true,
