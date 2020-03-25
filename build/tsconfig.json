@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
     "target"   : "ES2015",
-    "module"   : "ES2015",
-    "lib"      : ["DOM", "ES2015"],
-    "jsx"      : "react",
+    "module"   : "CommonJS",
+    "lib"      : ["ES2015"],
     "sourceMap": true,
     "strict"   : true,
     "noImplicitReturns"           : true,
@@ -15,7 +14,7 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "src/**/*"
+    "./**/*"
   ],
   "exclude": [
     "node_modules",
