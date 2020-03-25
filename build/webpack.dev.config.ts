@@ -1,6 +1,6 @@
 import * as Webpack from 'webpack'
 const merge      = require('webpack-merge')
-const baseConfig = require('./webpack.base.config.js')
+const baseConfig = require('./webpack.base.config')
 
 const devWebpackConfig = merge(baseConfig, <Webpack.Configuration>{
     mode: 'development',
