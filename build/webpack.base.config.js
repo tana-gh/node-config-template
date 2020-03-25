@@ -1,7 +1,8 @@
 const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CopyWebpackPlugin    = require('copy-webpack-plugin')
-const HtmlWebpackPlugin    = require('html-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const MiniCssExtractPlugin       = require('mini-css-extract-plugin')
+const CopyWebpackPlugin          = require('copy-webpack-plugin')
+const HtmlWebpackPlugin          = require('html-webpack-plugin')
 const Sass   = require('sass')
 const Fibers = require('fibers')
 
@@ -61,41 +62,57 @@ module.exports = {
         rules: [
             {
                 test: /\.jsx?$/,
-                loader: 'babel-loader',
-                exclude: '/node_modules/'
+                use: [
+                    'cache-loader',
+                    'babel-loader'
+                ],
+                exclude: /node_modules/
             },
             {
                 test: /\.tsx?$/,
                 use: [
+                    'cache-loader',
                     'babel-loader',
                     {
                         loader: 'ts-loader',
-                        ...(VueLoader ? { options: { appendTsSuffixTo: [/\.vue$/] } } : {})
+                        options: {
+                            transpileOnly: true,
+                            ...(VueLoader ? { appendTsSuffixTo: [/\.vue$/] } : {})
+                        }
                     }
                 ]
             },
             ...(VueLoader ? [{
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                use: [
+                    'cache-loader',
+                    'vue-loader'
+                ]
             }] : []),
             ...(SvelteLoader ? [{
                 test: /\.svelte$/,
                 use: {
-                    loader: 'svelte-loader',
-                    options: {
-                        preprocess: require('svelte-preprocess')({
-                            typescript: true,
-                            postcss: true,
-                            sass: true,
-                            scss: true
-                        })
-                    },
+                    use: [
+                        'cache-loader',
+                        {
+                            loader: 'svelte-loader',
+                            options: {
+                                preprocess: require('svelte-preprocess')({
+                                    typescript: true,
+                                    postcss: true,
+                                    sass: true,
+                                    scss: true
+                                })
+                            }
+                        }
+                    ]
                 },
                 exclude: /node_modules/
             }] : []),
             {
                 test: /\.css$/,
                 use: [
+                    'cache-loader',
                     VueLoader ? 'vue-style-loader' : 'style-loader',
                     MiniCssExtractPlugin.loader,
                     {
@@ -111,6 +128,7 @@ module.exports = {
             {
                 test: /\.sass$/,
                 use: [
+                    'cache-loader',
                     VueLoader ? 'vue-style-loader' : 'style-loader',
                     MiniCssExtractPlugin.loader,
                     {
@@ -137,6 +155,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
+                    'cache-loader',
                     VueLoader ? 'vue-style-loader' : 'style-loader',
                     MiniCssExtractPlugin.loader,
                     {
@@ -159,23 +178,35 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader: 'url-loader',
-                options: {
-                    limit: 10000,
-                    name: 'assets/images/[name].[hash:7].[ext]'
-                }
+                use: [
+                    'cache-loader',
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 10000,
+                            name: 'assets/images/[name].[hash:7].[ext]'
+                        }
+                    }
+                ]
             },
             {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-                loader: 'url-loader',
-                options: {
-                    limit: 10000,
-                    name: 'assets/fonts/[name].[hash:7].[ext]'
-                }
+                use: [
+                    'cache-loader',
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 10000,
+                            name: 'assets/fonts/[name].[hash:7].[ext]'
+                        }
+                    }
+                ]
             }
         ]
     },
     plugins: [
+        new ForkTsCheckerWebpackPlugin(),
+
         ...(VueLoader ? [new VueLoader.VueLoaderPlugin()] : []),
 
         new MiniCssExtractPlugin({
