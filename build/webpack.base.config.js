@@ -47,10 +47,12 @@ module.exports = Object.entries(TARGETS).map(([ key, target ]) => ({
         path: PATHS.dist,
         publicPath: ''
     },
-    node: {
-        __dirname : false,
-        __filename: false
-    },
+    ...(!target.includes('web') ? {
+        node: {
+            __dirname : false,
+            __filename: false
+        }
+    } : {}),
     resolve: {
         extensions: [ '.js', '.jsx', '.ts', '.tsx', 'json' ],
         ...(SvelteLoader ? { mainFields: ['svelte', 'browser', 'module', 'main'] } : {}),
