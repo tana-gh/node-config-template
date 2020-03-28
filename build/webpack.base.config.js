@@ -45,7 +45,7 @@ module.exports = Object.entries(TARGETS).map(([ key, target ]) => ({
     output: {
         filename: '[name].bundle.js',
         path: PATHS.dist,
-        publicPath: '/'
+        publicPath: ''
     },
     ...(!target.includes('web') ? {
         node: {
@@ -235,7 +235,7 @@ module.exports = Object.entries(TARGETS).map(([ key, target ]) => ({
         ...(PAGES[key] ? [
             new HtmlWebpackPlugin({
                 template: `${PAGES_DIR}/${PAGES[key]}`,
-                filename: `./${PAGES[key]}`,
+                filename: PAGES[key],
                 inject  : 'body',
                 chunks  : [ key, 'vendor' ]
             })
