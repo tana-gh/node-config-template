@@ -2,9 +2,9 @@ const webpack = require('webpack')
 const merge   = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config.js')
 
-const devWebpackConfig = merge(baseWebpackConfig, {
+const devWebpackConfig = baseWebpackConfig.map(config => merge(config, {
     mode: 'development',
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'eval-cheap-module-source-map',
     devServer: {
         contentBase: baseWebpackConfig.externals.paths.dist,
         port: 8080,
@@ -18,7 +18,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
             filename: '[file].map'
         })
     ]
-})
+}))
 
 module.exports = new Promise((res, rej) => {
     res(devWebpackConfig)

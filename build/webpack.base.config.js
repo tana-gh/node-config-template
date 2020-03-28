@@ -18,24 +18,38 @@ const PATHS = {
     assets: path.join(__dirname, '../../assets')
 }
 
-const ENTRIES = {
+const TARGETS = process.env.IS_ELECTRON ? {
+    main    : 'electron-main',
+    renderer: 'electron-renderer'
+} : {
+    main: 'web'
+}
+
+const ENTRIES = process.env.IS_ELECTRON ? {
+    main    : path.join(PATHS.src, 'main'),
+    renderer: path.join(PATHS.src, 'renderer')
+} : {
     main: PATHS.src
 }
 
 const PAGES_DIR = `${PATHS.assets}/html`
-const PAGES = {
+const PAGES = process.env.IS_ELECTRON ? {
+    renderer: 'index.html'
+} : {
     main: 'index.html'
 }
 
-module.exports = {
-    externals: {
-        paths: PATHS
-    },
-    entry: ENTRIES,
+module.exports = Object.entries(TARGETS).map(([ key, target ]) => ({
+    target,
+    entry: { [key]: ENTRIES[key] },
     output: {
-        filename: 'assets/js/[name].bundle.js',
+        filename: '[name].bundle.js',
         path: PATHS.dist,
-        publicPath: '/'
+        publicPath: ''
+    },
+    node: {
+        __dirname : false,
+        __filename: false
     },
     resolve: {
         extensions: [ '.js', '.jsx', '.ts', '.tsx', 'json' ],
@@ -50,9 +64,9 @@ module.exports = {
         splitChunks: {
             cacheGroups: {
                 vendor: {
-                    name: 'vendor',
-                    test: /node_modules/,
-                    chunks: 'all',
+                    name   : 'vendor',
+                    test   : /node_modules/,
+                    chunks : 'all',
                     enforce: true
                 }
             }
@@ -98,9 +112,9 @@ module.exports = {
                         options: {
                             preprocess: require('svelte-preprocess')({
                                 typescript: true,
-                                postcss: true,
-                                sass: true,
-                                scss: true
+                                postcss   : true,
+                                sass      : true,
+                                scss      : true
                             })
                         }
                     }
@@ -140,9 +154,9 @@ module.exports = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            sourceMap: true,
+                            sourceMap     : true,
                             implementation: require('sass'),
-                            sassOptions: {
+                            sassOptions   : {
                                 indentedSyntax: true,
                                 fiber: require('fibers')
                             }
@@ -167,9 +181,9 @@ module.exports = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            sourceMap: true,
+                            sourceMap     : true,
                             implementation: Sass,
-                            sassOptions: { fiber: Fibers }
+                            sassOptions   : { fiber: Fibers }
                         }
                     }
                 ]
@@ -182,7 +196,7 @@ module.exports = {
                         loader: 'url-loader',
                         options: {
                             limit: 10000,
-                            name: 'assets/images/[name].[hash:7].[ext]'
+                            name : 'assets/images/[name].[contenthash].[ext]'
                         }
                     }
                 ]
@@ -195,7 +209,7 @@ module.exports = {
                         loader: 'url-loader',
                         options: {
                             limit: 10000,
-                            name: 'assets/fonts/[name].[hash:7].[ext]'
+                            name : 'assets/fonts/[name].[contenthash].[ext]'
                         }
                     }
                 ]
@@ -208,7 +222,7 @@ module.exports = {
         ...(VueLoader ? [new VueLoader.VueLoaderPlugin()] : []),
 
         new MiniCssExtractPlugin({
-            filename: 'assets/css/[name].[contenthash].css'
+            filename: 'assets/css/[name].css'
         }),
         
         new CopyWebpackPlugin([
@@ -216,13 +230,17 @@ module.exports = {
             { from: `${PATHS.assets}/favicon`, to: 'assets/favicon' }
         ]),
 
-        ...Object.keys(PAGES).map(key =>
+        ...(PAGES[key] ? [
             new HtmlWebpackPlugin({
                 template: `${PAGES_DIR}/${PAGES[key]}`,
                 filename: `./${PAGES[key]}`,
                 inject  : 'body',
                 chunks  : [ key, 'vendor' ]
             })
-        )
+        ] : [])
     ]
+}))
+
+module.exports.externals = {
+    paths: PATHS
 }
