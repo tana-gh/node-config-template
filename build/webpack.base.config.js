@@ -45,7 +45,7 @@ module.exports = Object.entries(TARGETS).map(([ key, target ]) => ({
     output: {
         filename: '[name].bundle.js',
         path: PATHS.dist,
-        publicPath: IS_ELECTRON ? '' : '/'
+        publicPath: (process.env.IS_ELECTRON ? '' : '/')
     },
     ...(!target.includes('web') ? {
         node: {
