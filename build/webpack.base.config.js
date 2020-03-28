@@ -33,7 +33,7 @@ module.exports = {
     },
     entry: ENTRIES,
     output: {
-        filename: `assets/js/[name].[contenthash].js`,
+        filename: 'assets/js/[name].bundle.js',
         path: PATHS.dist,
         publicPath: '/'
     },
