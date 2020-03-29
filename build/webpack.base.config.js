@@ -1,8 +1,7 @@
 const path = require('path')
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const MiniCssExtractPlugin       = require('mini-css-extract-plugin')
-const CopyWebpackPlugin          = require('copy-webpack-plugin')
-const HtmlWebpackPlugin          = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyWebpackPlugin    = require('copy-webpack-plugin')
+const HtmlWebpackPlugin    = require('html-webpack-plugin')
 const Sass   = require('sass')
 const Fibers = require('fibers')
 
@@ -97,7 +96,6 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                     {
                         loader: 'ts-loader',
                         options: {
-                            transpileOnly: true,
                             ...(VueLoader ? { appendTsSuffixTo: [/\.vue$/] } : {})
                         }
                     }
@@ -107,6 +105,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 test: /\.elm$/,
                 use: [
                     'cache-loader',
+                    'babel-loader',
                     'elm-hot-webpack-loader',
                     {
                         loader: 'elm-webpack-loader',
@@ -121,6 +120,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 test: /\.vue$/,
                 use: [
                     'cache-loader',
+                    'babel-loader',
                     'vue-loader'
                 ]
             }] : []),
@@ -128,6 +128,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 test: /\.svelte$/,
                 use: [
                     'cache-loader',
+                    'babel-loader',
                     {
                         loader: 'svelte-loader',
                         options: {
@@ -238,8 +239,6 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
         ]
     },
     plugins: [
-        new ForkTsCheckerWebpackPlugin(),
-
         ...(VueLoader ? [new VueLoader.VueLoaderPlugin()] : []),
 
         new MiniCssExtractPlugin({
