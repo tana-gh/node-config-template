@@ -105,7 +105,6 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 test: /\.elm$/,
                 use: [
                     'cache-loader',
-                    'babel-loader',
                     'elm-hot-webpack-loader',
                     {
                         loader: 'elm-webpack-loader',
