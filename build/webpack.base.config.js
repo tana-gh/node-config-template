@@ -120,7 +120,6 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 test: /\.vue$/,
                 use: [
                     'cache-loader',
-                    'babel-loader',
                     'vue-loader'
                 ]
             }] : []),
