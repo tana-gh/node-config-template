@@ -2,8 +2,7 @@ const webpack = require('webpack')
 const merge   = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config.js')
 
-const devWebpackConfig = baseWebpackConfig.map(config => merge(config, {
-    mode: 'development',
+const devWebpackConfig = baseWebpackConfig('development').map(config => merge(config, {
     devtool: 'eval-cheap-module-source-map',
     devServer: {
         contentBase: baseWebpackConfig.externals.paths.dist,

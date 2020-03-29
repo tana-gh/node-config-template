@@ -6,6 +6,9 @@ const HtmlWebpackPlugin          = require('html-webpack-plugin')
 const Sass   = require('sass')
 const Fibers = require('fibers')
 
+let ElmLoader = undefined
+try { ElmLoader = require('elm-webpack-loader') } catch {}
+
 let VueLoader = undefined
 try { VueLoader = require('vue-loader') } catch {}
 
@@ -13,6 +16,7 @@ let SvelteLoader = undefined
 try { SvelteLoader = require('svelte-loader') } catch {}
 
 const PATHS = {
+    root  : path.join(__dirname, '../..'),
     src   : path.join(__dirname, '../../src'),
     dist  : path.join(__dirname, '../../dist'),
     assets: path.join(__dirname, '../../assets')
@@ -39,7 +43,8 @@ const PAGES = process.env.IS_ELECTRON ? {
     main: 'index.html'
 }
 
-module.exports = Object.entries(TARGETS).map(([ key, target ]) => ({
+module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
+    mode,
     target,
     entry: { [key]: ENTRIES[key] },
     output: {
@@ -98,6 +103,20 @@ module.exports = Object.entries(TARGETS).map(([ key, target ]) => ({
                     }
                 ]
             },
+            ...(ElmLoader ? [{
+                test: /\.elm$/,
+                use: [
+                    'cache-loader',
+                    'elm-hot-webpack-loader',
+                    {
+                        loader: 'elm-webpack-loader',
+                        options: {
+                            cwd     : PATHS.root,
+                            optimize: mode === 'production'
+                        }
+                    }
+                ]
+            }] : []),
             ...(VueLoader ? [{
                 test: /\.vue$/,
                 use: [
