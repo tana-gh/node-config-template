@@ -49,7 +49,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
     output: {
         filename: '[name].bundle.js',
         path: PATHS.dist,
-        publicPath: (process.env.IS_ELECTRON ? '' : '/')
+        publicPath: (process.env.IS_ELECTRON || mode == 'production' ? '' : '/')
     },
     ...(!target.includes('web') ? {
         node: {
