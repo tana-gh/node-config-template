@@ -243,10 +243,12 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
             filename: 'assets/css/[name].css'
         }),
         
-        new CopyWebpackPlugin([
-            { from: `${PATHS.assets}/images` , to: 'assets/images' },
-            { from: `${PATHS.assets}/favicon`, to: 'assets/favicon' }
-        ]),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: `${PATHS.assets}/images` , to: 'assets/images' },
+                { from: `${PATHS.assets}/favicon`, to: 'assets/favicon' }
+            ]
+        }),
 
         ...(PAGES[key] ? [
             new HtmlWebpackPlugin({
