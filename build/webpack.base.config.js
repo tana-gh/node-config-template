@@ -175,10 +175,10 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                         loader: 'sass-loader',
                         options: {
                             sourceMap     : true,
-                            implementation: require('sass'),
+                            implementation: Sass,
                             sassOptions   : {
                                 indentedSyntax: true,
-                                fiber: require('fibers')
+                                fiber: Fibers
                             }
                         }
                     }
