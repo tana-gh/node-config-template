@@ -252,10 +252,11 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
 
         ...(PAGES[key] ? [
             new HtmlWebpackPlugin({
-                template: `${PAGES_DIR}/${PAGES[key]}`,
-                filename: PAGES[key],
-                inject  : 'body',
-                chunks  : [ key, 'vendor' ]
+                template     : `${PAGES_DIR}/${PAGES[key]}`,
+                filename     : PAGES[key],
+                inject       : 'head',
+                scriptLoading: 'defer',
+                chunks       : [ key, 'vendor' ]
             })
         ] : [])
     ]
