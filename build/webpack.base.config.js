@@ -245,8 +245,9 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
         
         new CopyWebpackPlugin({
             patterns: [
-                { from: `${PATHS.assets}/images` , to: 'assets/images' },
-                { from: `${PATHS.assets}/favicon`, to: 'assets/favicon' }
+                { from: `${PATHS.assets}/favicon/**/*`, to: 'assets/favicon/' },
+                { from: `${PATHS.assets}/images/**/*` , to: 'assets/images/'  },
+                { from: `${PATHS.assets}/misc/**/*`   , to: 'assets/misc/'    }
             ]
         }),
 
