@@ -28,11 +28,10 @@
   },
   "overrides": [
     {
-      "files": [ "*.js", "*.jsx", "*.ts", "*.tsx", "*.vue", "*.svelte" ],
-      "excludedFiles": [ "*.spec.js", "*.spec.jsx", "*.spec.ts", "*.spec.tsx" ],
-      "processor": "svelte3/svelte3",
-      "rules": {
-      }
+      "files": [ "*.svelte" ],
+      "processor": "svelte3/svelte3"
     }
-  ]
+  ],
+  "rules": {
+  }
 }

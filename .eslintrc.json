@@ -25,12 +25,6 @@
       "jsx": true
     }
   },
-  "overrides": [
-    {
-      "files": [ "*.js", "*.jsx", "*.ts", "*.tsx", "*.vue" ],
-      "excludedFiles": [ "*.spec.js", "*.spec.jsx", "*.spec.ts", "*.spec.tsx" ],
-      "rules": {
-      }
-    }
-  ]
+  "rules": {
+  }
 }
