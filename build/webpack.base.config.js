@@ -84,7 +84,8 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 test: /\.jsx?$/,
                 use: [
                     'cache-loader',
-                    'babel-loader'
+                    'babel-loader',
+                    'eslint-loader'
                 ],
                 exclude: /node_modules/
             },
@@ -98,7 +99,8 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                         options: {
                             ...(VueLoader ? { appendTsSuffixTo: [/\.vue$/] } : {})
                         }
-                    }
+                    },
+                    'eslint-loader'
                 ]
             },
             ...(ElmLoader ? [{
@@ -119,7 +121,8 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 test: /\.vue$/,
                 use: [
                     'cache-loader',
-                    'vue-loader'
+                    'vue-loader',
+                    'eslint-loader'
                 ]
             }] : []),
             ...(SvelteLoader ? [{
@@ -137,7 +140,8 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                                 scss      : true
                             })
                         }
-                    }
+                    },
+                    'eslint-loader'
                 ],
                 exclude: /node_modules/
             }] : []),
