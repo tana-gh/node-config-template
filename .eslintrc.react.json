@@ -28,7 +28,7 @@
     }
   },
   "rules": {
-    "@typescript-eslint/explicit-module-boundary-types": { "allowArgumentsExplicitlyTypedAsAny": true },
+    "@typescript-eslint/explicit-module-boundary-types": [ "warn", { "allowArgumentsExplicitlyTypedAsAny": true } ],
     "react/display-name": "off"
   }
 }
