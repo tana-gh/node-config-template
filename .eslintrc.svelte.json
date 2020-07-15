@@ -10,7 +10,8 @@
   "plugins": [
     "@typescript-eslint",
     "import",
-    "jsx-a11y"
+    "jsx-a11y",
+    "svelte3"
   ],
   "env": {
     "browser": true,
@@ -24,6 +25,12 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
+  "overrides": [
+    {
+      "files": ["*.svelte"],
+      "processor": "svelte3/svelte3"
+    }
+  ],
   "rules": {
   }
 }
