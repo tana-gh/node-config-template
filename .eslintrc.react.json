@@ -28,5 +28,6 @@
     }
   },
   "rules": {
+    "react/display-name": false
   }
 }
