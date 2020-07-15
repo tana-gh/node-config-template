@@ -18,9 +18,19 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "project": "./tsconfig.json",
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "ecmaVersion": 2020,
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
-  "rules": {
-  }
+  "overrides": [
+    {
+      "files": [ "*.js", "*.jsx", "*.ts", "*.tsx", "*.vue" ],
+      "excludedFiles": [ "*.spec.*" ],
+      "rules": {
+      }
+    }
+  ]
 }
