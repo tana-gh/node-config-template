@@ -28,6 +28,7 @@
     }
   },
   "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": false,
     "react/display-name": false
   }
 }
