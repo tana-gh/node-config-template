@@ -237,6 +237,13 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                         }
                     }
                 ]
+            },
+            {
+                test: /\.(txt|glsl|raw)$/,
+                use: [
+                    'cache-loader',
+                    'raw-loader'
+                ]
             }
         ]
     },
