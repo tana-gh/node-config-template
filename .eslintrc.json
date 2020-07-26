@@ -1,12 +1,9 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended"
   ],
   "plugins": [
-    "@typescript-eslint",
     "jsx-a11y"
   ],
   "env": {
@@ -16,19 +13,33 @@
     "jest": true,
     "node": true
   },
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json",
     "sourceType": "module",
     "ecmaVersion": 2020,
     "ecmaFeatures": {
       "jsx": true
     }
   },
-  "rules": {
-    "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/no-empty-function": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/explicit-module-boundary-types": [ "warn", { "allowArgumentsExplicitlyTypedAsAny": true } ]
-  }
+  "overrides": [
+    {
+      "files": [ "**/*.ts" ],
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "plugins": [
+        "@typescript-eslint"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-module-boundary-types": [ "warn", { "allowArgumentsExplicitlyTypedAsAny": true } ]
+      }
+    }
+  ]
 }
