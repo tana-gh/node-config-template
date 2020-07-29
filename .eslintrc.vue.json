@@ -48,7 +48,10 @@
       ],
       "plugins": [
         "vue"
-      ]
+      ],
+      "rules": {
+        "vue/html-indent": "off"
+      }
     }
   ]
 }
