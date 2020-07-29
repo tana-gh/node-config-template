@@ -1,14 +1,10 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended"
   ],
   "plugins": [
-    "@typescript-eslint",
-    "jsx-a11y",
-    "svelte3"
+    "jsx-a11y"
   ],
   "env": {
     "browser": true,
@@ -17,9 +13,7 @@
     "jest": true,
     "node": true
   },
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json",
     "sourceType": "module",
     "ecmaVersion": 2020,
     "ecmaFeatures": {
@@ -28,14 +22,31 @@
   },
   "overrides": [
     {
+      "files": [ "**/*.ts", "**/*.tsx" ],
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "plugins": [
+        "@typescript-eslint"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-module-boundary-types": [ "warn", { "allowArgumentsExplicitlyTypedAsAny": true } ]
+      }
+    },
+    {
       "files": [ "*.svelte" ],
+      "plugins": [
+        "svelte3"
+      ],
       "processor": "svelte3/svelte3"
     }
-  ],
-  "rules": {
-    "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/no-empty-function": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/explicit-module-boundary-types": [ "warn", { "allowArgumentsExplicitlyTypedAsAny": true } ]
-  }
+  ]
 }
