@@ -1,5 +1,5 @@
 const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin    = require('copy-webpack-plugin')
 const HtmlWebpackPlugin    = require('html-webpack-plugin')
 const Sass   = require('sass')
@@ -150,7 +150,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 use: [
                     'cache-loader',
                     VueLoader ? 'vue-style-loader' : 'style-loader',
-                    MiniCssExtractPlugin.loader,
+                    // MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: { sourceMap: true }
@@ -166,7 +166,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 use: [
                     'cache-loader',
                     VueLoader ? 'vue-style-loader' : 'style-loader',
-                    MiniCssExtractPlugin.loader,
+                    // MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: { sourceMap: true }
@@ -193,7 +193,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 use: [
                     'cache-loader',
                     VueLoader ? 'vue-style-loader' : 'style-loader',
-                    MiniCssExtractPlugin.loader,
+                    // MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: { sourceMap: true }
@@ -250,9 +250,9 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
     plugins: [
         ...(VueLoader ? [new VueLoader.VueLoaderPlugin()] : []),
 
-        new MiniCssExtractPlugin({
-            filename: 'assets/css/[name].css'
-        }),
+        // new MiniCssExtractPlugin({
+        //     filename: 'assets/css/[name].css'
+        // }),
         
         new CopyWebpackPlugin({
             patterns: [
