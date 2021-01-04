@@ -2,7 +2,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin    = require('copy-webpack-plugin')
 const HtmlWebpackPlugin    = require('html-webpack-plugin')
-const Sass   = require('sass')
+const Sass   = require('sass/sass.dart')
 const Fibers = require('fibers')
 
 let ElmLoader = undefined
