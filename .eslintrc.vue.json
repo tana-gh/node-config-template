@@ -52,7 +52,9 @@
       ],
       "rules": {
         "no-empty": [ "error", { "allowEmptyCatch": true } ],
-        "vue/html-indent": "off"
+        "vue/html-indent": "off",
+        "vue/html-closing-bracket-spacing": "off",
+        "vue/max-attributes-per-line": "off"
       }
     }
   ]
