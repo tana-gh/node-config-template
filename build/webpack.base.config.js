@@ -121,7 +121,71 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 test: /\.vue$/,
                 use: [
                     'cache-loader',
-                    'vue-loader',
+                    {
+                        loader: 'vue-loader',
+                        options: {
+                            loaders: {
+                                css: [
+                                    'cache-loader',
+                                    'vue-style-loader',
+                                    // MiniCssExtractPlugin.loader,
+                                    {
+                                        loader: 'css-loader',
+                                        options: { sourceMap: true }
+                                    },
+                                    {
+                                        loader: 'postcss-loader',
+                                        options: { sourceMap: true }
+                                    }
+                                ],
+                                sass: [
+                                    'cache-loader',
+                                    'vue-style-loader',
+                                    // MiniCssExtractPlugin.loader,
+                                    {
+                                        loader: 'css-loader',
+                                        options: { sourceMap: true }
+                                    },
+                                    {
+                                        loader: 'postcss-loader',
+                                        options: { sourceMap: true }
+                                    },
+                                    {
+                                        loader: 'sass-loader',
+                                        options: {
+                                            sourceMap     : true,
+                                            implementation: Sass,
+                                            sassOptions   : {
+                                                indentedSyntax: true,
+                                                fiber: Fibers
+                                            }
+                                        }
+                                    }
+                                ],
+                                scss: [
+                                    'cache-loader',
+                                    'vue-style-loader',
+                                    // MiniCssExtractPlugin.loader,
+                                    {
+                                        loader: 'css-loader',
+                                        options: { sourceMap: true }
+                                    },
+                                    {
+                                        loader: 'postcss-loader',
+                                        options: { sourceMap: true }
+                                    },
+                                    {
+                                        loader: 'sass-loader',
+                                        options: {
+                                            sourceMap     : true,
+                                            implementation: Sass,
+                                            sassOptions   : { fiber: Fibers }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
                     'eslint-loader'
                 ]
             }] : []),
@@ -149,7 +213,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 test: /\.css$/,
                 use: [
                     'cache-loader',
-                    VueLoader ? 'vue-style-loader' : 'style-loader',
+                    'style-loader',
                     // MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
@@ -165,7 +229,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 test: /\.sass$/,
                 use: [
                     'cache-loader',
-                    VueLoader ? 'vue-style-loader' : 'style-loader',
+                    'style-loader',
                     // MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
@@ -192,7 +256,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 test: /\.scss$/,
                 use: [
                     'cache-loader',
-                    VueLoader ? 'vue-style-loader' : 'style-loader',
+                    'style-loader',
                     // MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
