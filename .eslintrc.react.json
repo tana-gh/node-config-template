@@ -1,5 +1,4 @@
 {
-  "files": [ "src/**/*.js", "src/**/*.jsx", "spec/**/*.js", "spec/**/*.jsx" ],
   "extends": [
     "eslint:recommended",
     "plugin:jsx-a11y/recommended",
@@ -33,7 +32,7 @@
   },
   "overrides": [
     {
-      "files": [ "src/**/*.ts", "src/**/*.tsx", "spec/**/*.ts", "spec/**/*.tsx" ],
+      "files": [ "**/*.ts", "**/*.tsx" ],
       "extends": [
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended"
