@@ -185,8 +185,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                                 ]
                             }
                         }
-                    },
-                    'eslint-loader'
+                    }
                 ]
             }] : []),
             ...(SvelteLoader ? [{
@@ -199,13 +198,11 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                         options: {
                             preprocess: require('svelte-preprocess')({
                                 typescript: true,
-                                postcss   : true,
                                 sass      : true,
                                 scss      : true
                             })
                         }
-                    },
-                    'eslint-loader'
+                    }
                 ]
             }] : []),
             {
