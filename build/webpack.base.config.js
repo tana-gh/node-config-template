@@ -206,8 +206,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                         }
                     },
                     'eslint-loader'
-                ],
-                exclude: /node_modules/
+                ]
             }] : []),
             {
                 test: /\.css$/,
