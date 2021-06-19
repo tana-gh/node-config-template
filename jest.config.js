@@ -19,5 +19,6 @@ module.exports = {
     collectCoverageFrom: [
         'src/**/*.([jt]s?(x))',
         '!**/node_modules/**'
-    ]
+    ],
+    testEnvironment: 'jsdom'
 }
