@@ -107,15 +107,13 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 test: /\.elm$/,
                 use: [
                     'cache-loader',
-                    'elm-hot-webpack-loader',
+                    ...(mode === 'development' ? [ 'elm-hot-webpack-loader' ] : []),
                     {
                         loader: 'elm-webpack-loader',
-                        options: {
-                            cwd     : PATHS.root,
-                            optimize: mode === 'production'
-                        }
+                        options: { cwd: PATHS.root }
                     }
-                ]
+                ],
+                exclude: [ /elm-stuff/, /node_modules/ ]
             }] : []),
             ...(VueLoader ? [{
                 test: /\.vue$/,
