@@ -7,9 +7,11 @@ const devWebpackConfig = baseWebpackConfig('development').map(config => merge(co
     devServer: {
         contentBase: baseWebpackConfig.externals.paths.dist,
         port: 8080,
-        overlay: {
-            warnings: true,
-            errors  : true
+        client: {
+            overlay: {
+                warnings: true,
+                errors  : true
+            }
         }
     },
     plugins: [
