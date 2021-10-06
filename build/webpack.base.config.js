@@ -1,4 +1,5 @@
 const path = require('path')
+const EslintWebpackPlugin  = require('eslint-webpack-plugin')
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin    = require('copy-webpack-plugin')
 const HtmlWebpackPlugin    = require('html-webpack-plugin')
@@ -84,8 +85,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                 test: /\.jsx?$/,
                 use: [
                     'cache-loader',
-                    'babel-loader',
-                    'eslint-loader'
+                    'babel-loader'
                 ],
                 exclude: /node_modules/
             },
@@ -99,8 +99,7 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
                         options: {
                             ...(VueLoader ? { appendTsSuffixTo: [/\.vue$/] } : {})
                         }
-                    },
-                    'eslint-loader'
+                    }
                 ]
             },
             ...(ElmLoader ? [{
@@ -307,6 +306,8 @@ module.exports = mode => Object.entries(TARGETS).map(([ key, target ]) => ({
     },
     plugins: [
         ...(VueLoader ? [new VueLoader.VueLoaderPlugin()] : []),
+
+        new EslintWebpackPlugin(),
 
         // new MiniCssExtractPlugin({
         //     filename: 'assets/css/[name].css'
